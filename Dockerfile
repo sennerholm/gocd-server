@@ -6,9 +6,7 @@ ADD scripts/go-common-scripts.sh /usr/local/bin/
 ADD scripts/go-server-start.sh /usr/local/bin/
 
 # Download an install Go-server
-ADD http://download.go.cd/gocd-deb/go-server-14.4.0-1356.deb /tmp/go-server.deb
-WORKDIR /tmp
-RUN dpkg -i /tmp/go-server.deb 
+RUN wget -O /tmp/go-server.deb http://download.go.cd/gocd-deb/go-server-14.2.0-377.deb && dpkg -i /tmp/go-server.deb && rm -f /tmp/go-server.deb
 RUN sed -i -e 's/DAEMON=Y/DAEMON=N/' /etc/default/go-server
 
 EXPOSE 8153 8154
